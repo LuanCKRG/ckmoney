@@ -1,21 +1,12 @@
-import { GlobalStyle } from './styles/global'
-import { AuthProvider } from './contexts/AuthContext'
-import { BrowserRouter } from 'react-router-dom'
-import { Routes } from './Routes'
-import { UserProvider } from './contexts/UserContext'
+import { Header } from "@/components/header"
 
-
-export const App: React.FC = () => {
-  return (
-    <>
-      <GlobalStyle />
-      <BrowserRouter>
-        <UserProvider>
-          <AuthProvider>
-            <Routes />
-          </AuthProvider>
-        </UserProvider>
-      </BrowserRouter>
-    </>
-  )
+export const App = () => {
+	return (
+		<>
+			<Header />
+			<div>
+				<h1>Hello</h1>
+			</div>
+		</>
+	)
 }
