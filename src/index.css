@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-background: #F8F2F5;
+  --color-shape: #FFFFFF;
+
+  --color-primary-red: #E52E4D;
+  --color-dark-purple: #5429CC;
+  --color-primary-green: #33CC95;
+
+  --color-light-purple: #6933FF;
+
+  --color-title: #363F5F;
+  --color-body: #969CB3;    
+}
+
+@layer base {
+  body {
+    @apply bg-background
+  }
+
+  button {
+    @apply hover:cursor-pointer
+  }
+}
