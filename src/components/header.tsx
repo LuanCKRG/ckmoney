@@ -6,7 +6,7 @@ import { DialogHeader, Dialog, DialogTrigger, DialogContent, DialogTitle } from 
 export const Header = () => {
 	return (
 		<header className="bg-dark-purple">
-			<div className="flex justify-between w-full max-w-6xl pt-8 pb-48 px-4 mx-auto">
+			<div className="flex justify-between w-full max-w-6xl pt-8 pb-36 px-4 mx-auto">
 				<img src={logo} alt="CK Money" />
 
 				<Dialog>
