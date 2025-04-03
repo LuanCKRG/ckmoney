@@ -5,17 +5,17 @@ import { cn } from "@/lib/utils"
 const Table = ({ className, ...props }: React.ComponentProps<"table">) => {
 	return (
 		<div data-slot="table-container" className="relative w-full overflow-x-auto">
-			<table data-slot="table" className={cn("w-full caption-bottom text-sm", className)} {...props} />
+			<table data-slot="table" className={cn("w-full caption-bottom text-sm border-separate border-spacing-y-2", className)} {...props} />
 		</div>
 	)
 }
 
 const TableHeader = ({ className, ...props }: React.ComponentProps<"thead">) => {
-	return <thead data-slot="table-header" className={cn("[&_tr]:border-b", className)} {...props} />
+	return <thead data-slot="table-header" className={cn("", className)} {...props} />
 }
 
 const TableBody = ({ className, ...props }: React.ComponentProps<"tbody">) => {
-	return <tbody data-slot="table-body" className={cn("[&_tr:last-child]:border-0", className)} {...props} />
+	return <tbody data-slot="table-body" className={cn("", className)} {...props} />
 }
 
 const TableFooter = ({ className, ...props }: React.ComponentProps<"tfoot">) => {
@@ -29,16 +29,7 @@ const TableFooter = ({ className, ...props }: React.ComponentProps<"tfoot">) => 
 }
 
 const TableRow = ({ className, ...props }: React.ComponentProps<"tr">) => {
-	return (
-		<tr
-			data-slot="table-row"
-			className={cn(
-				"hover:bg-neutral-100/50 data-[state=selected]:bg-neutral-100 border-b transition-colors dark:hover:bg-neutral-800/50 dark:data-[state=selected]:bg-neutral-800",
-				className
-			)}
-			{...props}
-		/>
-	)
+	return <tr data-slot="table-row" className={cn("hover:bg-neutral-100/50 data-[state=selected]:bg-neutral-100 transition-colors", className)} {...props} />
 }
 
 const TableHead = ({ className, ...props }: React.ComponentProps<"th">) => {
@@ -46,7 +37,7 @@ const TableHead = ({ className, ...props }: React.ComponentProps<"th">) => {
 		<th
 			data-slot="table-head"
 			className={cn(
-				"text-neutral-950 h-10 px-2 text-left align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] dark:text-neutral-50",
+				"text-title h-10 px-2 text-center align-middle font-medium whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
 				className
 			)}
 			{...props}
@@ -58,7 +49,10 @@ const TableCell = ({ className, ...props }: React.ComponentProps<"td">) => {
 	return (
 		<td
 			data-slot="table-cell"
-			className={cn("p-2 align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]", className)}
+			className={cn(
+				"bg-shape text-body py-4 px-8 rounded-sm align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+				className
+			)}
 			{...props}
 		/>
 	)
