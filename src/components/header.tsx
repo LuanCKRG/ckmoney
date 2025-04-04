@@ -1,7 +1,7 @@
-import logo from "@/assets/logo.svg"
 import incomeImg from "@/assets/income.svg"
+import logo from "@/assets/logo.svg"
 import outcomeImg from "@/assets/outcome.svg"
-import { DialogHeader, Dialog, DialogTrigger, DialogContent, DialogTitle } from "./ui/dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog"
 
 export const Header = () => {
 	return (
