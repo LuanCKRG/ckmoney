@@ -50,7 +50,7 @@ const TableCell = ({ className, ...props }: React.ComponentProps<"td">) => {
 		<td
 			data-slot="table-cell"
 			className={cn(
-				"bg-shape text-body py-4 px-8 rounded-sm align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+				"bg-shape text-body py-4 px-8 rounded-sm text-center align-middle whitespace-nowrap [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
 				className
 			)}
 			{...props}
