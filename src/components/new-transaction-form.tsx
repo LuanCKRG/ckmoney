@@ -3,6 +3,7 @@ import outcomeImg from "@/assets/outcome.svg"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useTransactions } from "@/contexts/transactions-context"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -17,6 +18,8 @@ const newTransactionSchema = z.object({
 export type NewTransactionData = z.infer<typeof newTransactionSchema>
 
 export const NewTransactionForm = () => {
+	const { addTransaction } = useTransactions()
+
 	const newTransactionForm = useForm<z.infer<typeof newTransactionSchema>>({
 		resolver: zodResolver(newTransactionSchema),
 		defaultValues: {
@@ -27,7 +30,7 @@ export const NewTransactionForm = () => {
 		}
 	})
 
-	const { setValue, watch, control, handleSubmit } = newTransactionForm
+	const { setValue, watch, control, handleSubmit, reset } = newTransactionForm
 	const type = watch("type")
 
 	function handleTransactionType(newType: "income" | "outcome") {
@@ -35,7 +38,8 @@ export const NewTransactionForm = () => {
 	}
 
 	function onSubmit(data: NewTransactionData) {
-		console.log(data)
+		addTransaction({ ...data, date: "" })
+		reset()
 	}
 
 	return (
