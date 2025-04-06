@@ -3,6 +3,6 @@ export interface TransactionProps {
 	value: number
 	title: string
 	type: "income" | "outcome"
-	date: string
+	date: Date
 	category: string
 }
