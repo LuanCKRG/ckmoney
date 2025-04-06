@@ -4,6 +4,7 @@ import { TransactionsTable } from "@/components/transactions-table"
 import incomeImg from "@/assets/income.svg"
 import outcomeImg from "@/assets/outcome.svg"
 import totalImg from "@/assets/total.svg"
+import { TransactionsProvider } from "@/contexts/transactions-context"
 
 export const App = () => {
 	const cards = [
@@ -22,7 +23,7 @@ export const App = () => {
 	]
 
 	return (
-		<>
+		<TransactionsProvider>
 			<Header />
 
 			<div className="mx-auto max-w-6xl py-10 px-4">
@@ -47,6 +48,6 @@ export const App = () => {
 
 				<TransactionsTable className="mt-16" />
 			</div>
-		</>
+		</TransactionsProvider>
 	)
 }
