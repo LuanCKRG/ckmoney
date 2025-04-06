@@ -19,6 +19,7 @@
     "ckmoney": "file:",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "lucide-react": "^0.487.0",
     "ma_money": "file:",
     "react": "^19.0.0",
