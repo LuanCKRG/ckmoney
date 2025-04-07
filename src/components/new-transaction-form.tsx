@@ -38,7 +38,7 @@ export const NewTransactionForm = () => {
 	}
 
 	function onSubmit(data: NewTransactionData) {
-		addTransaction({ ...data, date: "" })
+		addTransaction({ ...data, date: new Date() })
 		reset()
 	}
 
@@ -62,6 +62,7 @@ export const NewTransactionForm = () => {
 						</FormItem>
 					)}
 				/>
+
 				<FormField
 					control={control}
 					name="value"
@@ -119,6 +120,7 @@ export const NewTransactionForm = () => {
 						</FormItem>
 					)}
 				/>
+
 				<Button className="w-full h-16 font-semibold bg-primary-green text-white rounded-sm px-6 hover:brightness-90" type="submit">
 					Submit
 				</Button>
