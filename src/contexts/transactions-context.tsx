@@ -24,7 +24,7 @@ export const TransactionsProvider: React.FC<{ children: ReactNode }> = ({ childr
 		}
 	}, [transactions])
 
-	const addTransaction = (transaction: Omit<TransactionProps, "id">) => {
+	function addTransaction(transaction: Omit<TransactionProps, "id">) {
 		const newTransaction = {
 			...transaction,
 			id: Date.now()
@@ -32,7 +32,7 @@ export const TransactionsProvider: React.FC<{ children: ReactNode }> = ({ childr
 		setTransactions((prev) => [...prev, newTransaction])
 	}
 
-	const removeTransaction = (id: number) => {
+	function removeTransaction(id: number) {
 		setTransactions((prev) => prev.filter((transaction) => transaction.id !== id))
 	}
 
