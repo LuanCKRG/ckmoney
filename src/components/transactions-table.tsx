@@ -110,7 +110,7 @@ export const TransactionsTable = ({ className }: TransactionsTableProps) => {
 				{transactions.map((transaction) => (
 					<TableRow key={transaction.id}>
 						<TableCell className="font-medium">{transaction.title}</TableCell>
-						<TableCell>{transaction.value}</TableCell>
+						<TableCell className={cn("text-primary-green", transaction.type === "outcome" && "text-primary-red")}>{transaction.value}</TableCell>
 						<TableCell>
 							<PopoverDemo>{transaction.category}</PopoverDemo>
 						</TableCell>
