@@ -110,7 +110,12 @@ export const TransactionsTable = ({ className }: TransactionsTableProps) => {
 				{transactions.map((transaction) => (
 					<TableRow key={transaction.id}>
 						<TableCell className="font-medium">{transaction.title}</TableCell>
-						<TableCell className={cn("text-primary-green", transaction.type === "outcome" && "text-primary-red")}>{transaction.value}</TableCell>
+						<TableCell className={cn("text-primary-green", transaction.type === "outcome" && "text-primary-red")}>
+							{Intl.NumberFormat("pt-BR", {
+								style: "currency",
+								currency: "BRL"
+							}).format(transaction.value)}
+						</TableCell>
 						<TableCell>
 							<PopoverDemo>{transaction.category}</PopoverDemo>
 						</TableCell>
