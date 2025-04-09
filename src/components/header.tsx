@@ -8,7 +8,7 @@ export const Header = () => {
 			<div className="flex justify-between w-full max-w-6xl pt-8 pb-36 px-4 mx-auto">
 				<img src={logo} alt="CK Money" />
 
-				<Dialog>
+				<Dialog modal={false}>
 					<DialogTrigger asChild>
 						<button type="button" className="h-12 px-8 text-base rounded-sm bg-light-purple text-shape hover:brightness-90 duration-200">
 							Nova transação
