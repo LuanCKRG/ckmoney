@@ -8,17 +8,21 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
+export const NewTransactionForm = () => {
+	const { addTransaction, categories, addCategory } = useTransactions()
+	const [categorySearch, setCategorySearch] = useState<string>("")
+
 const newTransactionSchema = z.object({
 	title: z.string().min(1, "Título é obrigatório"),
 	value: z.coerce.number().min(0, "Valor deve ser maior que 0"),
 	type: z.enum(["income", "outcome"]),
-	category: z.string().min(1, "Categoria é obrigatória")
+		category: z.string().refine(
+			(val) => categories.includes(val), // Valida se a categoria está na lista
+			{ message: "Categoria inválida" }
+		)
 })
 
-export type NewTransactionData = z.infer<typeof newTransactionSchema>
-
-export const NewTransactionForm = () => {
-	const { addTransaction } = useTransactions()
+	type NewTransactionData = z.infer<typeof newTransactionSchema>
 
 	const newTransactionForm = useForm<z.infer<typeof newTransactionSchema>>({
 		resolver: zodResolver(newTransactionSchema),
