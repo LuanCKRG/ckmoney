@@ -7,20 +7,25 @@ import { useTransactions } from "@/contexts/transactions-context"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command"
+import { Check, ChevronsUpDown } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { useState } from "react"
 
 export const NewTransactionForm = () => {
 	const { addTransaction, categories, addCategory } = useTransactions()
 	const [categorySearch, setCategorySearch] = useState<string>("")
 
-const newTransactionSchema = z.object({
-	title: z.string().min(1, "Título é obrigatório"),
-	value: z.coerce.number().min(0, "Valor deve ser maior que 0"),
-	type: z.enum(["income", "outcome"]),
+	const newTransactionSchema = z.object({
+		title: z.string().min(1, "Título é obrigatório"),
+		value: z.coerce.number().min(0, "Valor deve ser maior que 0"),
+		type: z.enum(["income", "outcome"]),
 		category: z.string().refine(
 			(val) => categories.includes(val), // Valida se a categoria está na lista
 			{ message: "Categoria inválida" }
 		)
-})
+	})
 
 	type NewTransactionData = z.infer<typeof newTransactionSchema>
 
@@ -36,6 +41,11 @@ const newTransactionSchema = z.object({
 
 	const { setValue, watch, control, handleSubmit, reset } = newTransactionForm
 	const type = watch("type")
+
+	function handleCreateNewCategory() {
+		addCategory(categorySearch)
+		setValue("category", categorySearch)
+	}
 
 	function handleTransactionType(newType: "income" | "outcome") {
 		setValue("type", newType)
@@ -112,13 +122,57 @@ const newTransactionSchema = z.object({
 					name="category"
 					render={({ field }) => (
 						<FormItem>
-							<FormControl>
-								<Input
-									placeholder="Categoria"
-									className="w-full h-16 px-6 border border-neutral-300 rounded-sm placeholder:text-body bg-gray-200 text-base"
-									{...field}
-								/>
-							</FormControl>
+							<Popover>
+								<PopoverTrigger asChild>
+									<FormControl>
+										<Button
+											variant="outline"
+											className={cn(
+												"w-[250px] mx-auto justify-between h-16 px-6 border border-neutral-300 rounded-sm placeholder:text-body bg-gray-200 text-base font-normal",
+												!field.value && "text-muted-foreground"
+											)}
+										>
+											{field.value ? categories.find((category) => category === field.value) : "Selecione a categoria"}
+											<ChevronsUpDown className="opacity-50 stroke-3 size-5" />
+										</Button>
+									</FormControl>
+								</PopoverTrigger>
+
+								<PopoverContent className="w-[250px] p-0">
+									<Command>
+										<CommandInput value={categorySearch} onValueChange={setCategorySearch} placeholder="Procurar categoria..." className="h-9" />
+
+										<CommandList>
+											<CommandEmpty className="p-3 text-left">
+												<button
+													onClick={() => handleCreateNewCategory()}
+													type="button"
+													className="p-2 bg-gray-300 hover:bg-gray-200 transition-colors duration-200 w-full rounded-sm"
+												>
+													Criar <span className="py-1 px-3 bg-violet-500 text-white rounded-sm">{categorySearch}</span>
+												</button>
+											</CommandEmpty>
+
+											<CommandGroup>
+												{categories.map((category) => (
+													<CommandItem
+														value={category}
+														key={category}
+														onSelect={() => {
+															setValue("category", category)
+														}}
+														className="hover:cursor-pointer hover:brightness-90"
+													>
+														{category}
+														<Check className={cn("ml-auto", category === field.value ? "opacity-100" : "opacity-0")} />
+													</CommandItem>
+												))}
+												<p className="text-xs text-body indent-3 py-1 ">Selecione uma categoria ou crie uma</p>
+											</CommandGroup>
+										</CommandList>
+									</Command>
+								</PopoverContent>
+							</Popover>
 
 							<FormMessage />
 						</FormItem>
