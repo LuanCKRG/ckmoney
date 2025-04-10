@@ -1,9 +1,9 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { cn } from "@/lib/utils"
-import { PopoverDemo } from "./category-popover"
 import { useTransactions } from "@/contexts/transactions-context"
+import { cn } from "@/lib/utils"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
+import { PopoverDemo } from "./category-popover"
 
 // const TRANSACTIONS: TransactionProps[] = [
 // 	{
