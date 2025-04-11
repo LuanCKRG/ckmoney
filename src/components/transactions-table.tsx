@@ -116,9 +116,7 @@ export const TransactionsTable = ({ className }: TransactionsTableProps) => {
 								currency: "BRL"
 							}).format(transaction.value)}
 						</TableCell>
-						<TableCell>
-							<PopoverDemo>{transaction.category}</PopoverDemo>
-						</TableCell>
+						<TableCell>{transaction.category}</TableCell>
 						<TableCell>{format(transaction.date, "P", { locale: ptBR })}</TableCell>
 					</TableRow>
 				))}
