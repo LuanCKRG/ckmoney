@@ -23,7 +23,7 @@ export const Summary = () => {
 				<div key={card.title} className="bg-shape px-6 py-3 rounded-sm text-title shadow-lg">
 					<header className="flex items-center justify-between">
 						<p>{card.title}</p>
-						<img src={card.image} alt="Entradas" />
+						<img src={card.image} alt={card.title} />
 					</header>
 
 					<strong className="mt-4 text-3xl font-medium leading-12">
