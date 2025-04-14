@@ -149,7 +149,7 @@ export const NewTransactionForm = () => {
 													type="button"
 													className="p-2 bg-gray-300 hover:bg-gray-200 transition-colors duration-200 w-full rounded-sm"
 												>
-													Criar <span className="py-1 px-3 bg-violet-500 text-white rounded-sm">{categorySearch}</span>
+													Criar <span className="rounded-sm underline">{categorySearch}</span>
 												</button>
 											</CommandEmpty>
 
