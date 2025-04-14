@@ -174,7 +174,7 @@ export const NewTransactionForm = () => {
 								</PopoverContent>
 							</Popover>
 
-							<FormMessage />
+							<FormMessage className="mx-auto" />
 						</FormItem>
 					)}
 				/>
