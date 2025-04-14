@@ -40,8 +40,8 @@ export const NewTransactionForm = () => {
 	const type = watch("type")
 
 	function handleCreateNewCategory() {
-		addCategory(categorySearch)
-		setValue("category", categorySearch)
+		addCategory(categorySearch.trim())
+		setValue("category", categorySearch.trim())
 	}
 
 	function handleTransactionType(newType: "income" | "outcome") {
