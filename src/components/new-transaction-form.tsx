@@ -53,6 +53,33 @@ export const NewTransactionForm = () => {
 		reset()
 	}
 
+	function formatCurrency(value: number) {
+		// Garante que o valor seja tratado como centavos
+		const cents = Math.round(value * 100)
+		const integerPart = Math.floor(cents / 100)
+		const decimalPart = cents % 100
+
+		// Formata parte inteira com separadores de milhar
+		const formattedInteger = new Intl.NumberFormat("pt-BR", {
+			style: "decimal",
+			maximumFractionDigits: 0
+		}).format(integerPart)
+
+		// Garante dois dígitos nos centavos
+		const formattedDecimal = decimalPart.toString().padStart(2, "0")
+
+		return `R$ ${formattedInteger},${formattedDecimal}`
+	}
+
+	function parseCurrency(formattedValue: string) {
+		// Remove todos os não dígitos e converte para número
+		const rawValue = formattedValue.replace(/\D/g, "")
+
+		// Converte para centavos e divide por 100
+		const value = Number.parseInt(rawValue.padEnd(3, "0"), 10) / 100
+
+		return Number.isNaN(value) ? 0 : value
+	}
 	return (
 		<Form {...newTransactionForm}>
 			<form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
@@ -83,7 +110,11 @@ export const NewTransactionForm = () => {
 								<Input
 									placeholder="Valor"
 									className="w-full h-16 px-6 border border-neutral-300 rounded-sm placeholder:text-body bg-gray-200 text-base"
-									{...field}
+									value={formatCurrency(field.value || 0)}
+									onChange={(e) => {
+										const numericValue = parseCurrency(e.target.value)
+										field.onChange(numericValue)
+									}}
 								/>
 							</FormControl>
 
