@@ -21,10 +21,7 @@ export const NewTransactionForm = () => {
 		title: z.string().min(1, "Título é obrigatório"),
 		value: z.coerce.number().min(0, "Valor deve ser maior que 0"),
 		type: z.enum(["income", "outcome"]),
-		category: z.string().refine(
-			(val) => categories.includes(val), // Valida se a categoria está na lista
-			{ message: "Categoria inválida" }
-		)
+		category: z.string().refine((val) => categories.includes(val), { message: "Categoria inválida ou não cadastrada" })
 	})
 
 	type NewTransactionData = z.infer<typeof newTransactionSchema>
