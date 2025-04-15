@@ -5,4 +5,5 @@ export interface TransactionProps {
 	type: "income" | "outcome"
 	date: Date
 	category: string
+	note?: string
 }
