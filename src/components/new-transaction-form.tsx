@@ -39,20 +39,6 @@ export const NewTransactionForm = () => {
 	const { setValue, watch, control, handleSubmit, reset } = newTransactionForm
 	const type = watch("type")
 
-	function handleCreateNewCategory() {
-		addCategory(categorySearch.trim())
-		setValue("category", categorySearch.trim())
-	}
-
-	function handleTransactionType(newType: "income" | "outcome") {
-		setValue("type", newType)
-	}
-
-	function onSubmit(data: NewTransactionData) {
-		addTransaction({ ...data, date: new Date() })
-		reset()
-	}
-
 	function formatCurrency(value: number) {
 		// Garante que o valor seja tratado como centavos
 		const cents = Math.round(value * 100)
@@ -80,6 +66,21 @@ export const NewTransactionForm = () => {
 
 		return Number.isNaN(value) ? 0 : value
 	}
+
+	function handleCreateNewCategory() {
+		addCategory(categorySearch.trim())
+		setValue("category", categorySearch.trim())
+	}
+
+	function handleTransactionType(newType: "income" | "outcome") {
+		setValue("type", newType)
+	}
+
+	function onSubmit(data: NewTransactionData) {
+		addTransaction({ ...data, date: new Date() })
+		reset()
+	}
+
 	return (
 		<Form {...newTransactionForm}>
 			<form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
