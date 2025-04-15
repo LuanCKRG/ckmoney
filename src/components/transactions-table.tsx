@@ -1,8 +1,10 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { useTransactions } from "@/contexts/transactions-context"
 import { cn } from "@/lib/utils"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
+import { Info } from "lucide-react"
 
 // const TRANSACTIONS: TransactionProps[] = [
 // 	{
@@ -101,6 +103,7 @@ export const TransactionsTable = ({ className }: TransactionsTableProps) => {
 					<TableHead>Título</TableHead>
 					<TableHead>Valor</TableHead>
 					<TableHead>Categoria</TableHead>
+					<TableHead className="w-[25px]">Obs.</TableHead>
 					<TableHead>Data</TableHead>
 				</TableRow>
 			</TableHeader>
@@ -116,6 +119,20 @@ export const TransactionsTable = ({ className }: TransactionsTableProps) => {
 							}).format(transaction.value)}
 						</TableCell>
 						<TableCell>{transaction.category}</TableCell>
+						<TableCell>
+							{transaction.note && (
+								<TooltipProvider>
+									<Tooltip>
+										<TooltipTrigger>
+											<Info className="size-4" />
+										</TooltipTrigger>
+										<TooltipContent>
+											<p>{transaction.note}</p>
+										</TooltipContent>
+									</Tooltip>
+								</TooltipProvider>
+							)}
+						</TableCell>
 						<TableCell>{format(transaction.date, "P", { locale: ptBR })}</TableCell>
 					</TableRow>
 				))}
