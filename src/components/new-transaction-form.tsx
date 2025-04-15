@@ -127,25 +127,29 @@ export const NewTransactionForm = () => {
 				/>
 
 				<div className="grid grid-cols-2 gap-2">
-					<button
+					<Button
 						onClick={() => handleTransactionType("income")}
-						className={`h-16 border rounded-sm flex justify-center items-center space-x-4 transition-colors
-      ${type === "income" ? "bg-[#E4EEEB] border-green-500 hover:border-green-600" : "border-neutral-300 hover:border-[#BEBEBE] bg-transparent"}`}
+						className={cn("h-16 rounded-sm gap-x-4", {
+							"bg-[#E4EEEB] border-green-500 hover:border-green-600": type === "income",
+							"border-neutral-300 hover:border-[#BEBEBE] bg-transparent": type === "outcome"
+						})}
 						type="button"
 					>
 						<img className="size-5" src={incomeImg} alt="Entrada" />
 						<span className="text-base text-title">Entrada</span>
-					</button>
+					</Button>
 
-					<button
+					<Button
 						onClick={() => handleTransactionType("outcome")}
-						className={`h-16 border rounded-sm flex justify-center items-center space-x-4 transition-colors
-      ${type === "outcome" ? "bg-[#F6DEE4] border-red-500 hover:border-red-600" : "border-neutral-300 hover:border-[#BEBEBE] bg-transparent"}`}
+						className={cn("h-16 rounded-sm gap-x-4", {
+							"border-neutral-300 hover:border-[#BEBEBE] bg-transparent": type === "income",
+							"bg-[#F6DEE4] border-red-500 hover:border-red-600": type === "outcome"
+						})}
 						type="button"
 					>
 						<img className="size-5" src={outcomeImg} alt="Saída" />
 						<span className="text-base text-title">Saída</span>
-					</button>
+					</Button>
 				</div>
 
 				<FormField
