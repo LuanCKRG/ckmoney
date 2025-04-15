@@ -5,6 +5,7 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Textarea } from "@/components/ui/textarea"
 import { useTransactions } from "@/contexts/transactions-context"
 import { cn } from "@/lib/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -21,7 +22,8 @@ export const NewTransactionForm = () => {
 		title: z.string().min(1, "Título é obrigatório"),
 		value: z.coerce.number().gt(0, "Valor deve ser maior que 0"),
 		type: z.enum(["income", "outcome"]),
-		category: z.string().refine((val) => categories.includes(val), { message: "Categoria inválida ou não cadastrada" })
+		category: z.string().refine((val) => categories.includes(val), { message: "Categoria inválida ou não cadastrada" }),
+		note: z.string().optional()
 	})
 
 	type NewTransactionData = z.infer<typeof newTransactionSchema>
@@ -204,6 +206,25 @@ export const NewTransactionForm = () => {
 							</Popover>
 
 							<FormMessage className="mx-auto" />
+						</FormItem>
+					)}
+				/>
+
+				<FormField
+					control={control}
+					name="note"
+					render={({ field }) => (
+						<FormItem>
+							<FormControl>
+								<Textarea
+									placeholder="Observação"
+									className="resize-none
+									w-full px-6 border border-neutral-300 rounded-sm placeholder:text-body bg-gray-200 text-base
+								"
+									{...field}
+								/>
+							</FormControl>
+							<FormMessage />
 						</FormItem>
 					)}
 				/>
